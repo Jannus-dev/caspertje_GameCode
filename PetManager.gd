@@ -37,46 +37,59 @@ var thirst_stage: int = 0
 # variabele om bij te houden of het monster levend of dood is
 var alive: bool = true
 
-# 
+# variabele van de honger timer
 var hunger_timer: float = 0.0
 
+# variabele van de leeftijds timer
 var age_timer: float = 0.0
 
 var current_minute_key: String
 
+# variabele om bij te houden of er drinken is gegeven sinds de 5 in de klok zit 
 var gave_drink_this_window: bool = false
 
-var missed_drinks: int = 0   # tellen hoeveel keer gemist
-
+# Variabele voor de timer die zorgt dat de nausea er maar kort is wanneer op de drink knop gedrukt word als de 5 niet in de klok zit
 var nausea_timer: float = 0.0
 
+# Variabele die bij houd of de nausea geactiveerd word of niet
 var nausea_active: bool = false
 
 # referenties naar nodes
 
+# refereerd naar de sprits voor caspertje
 @onready var pet_sprite: Sprite2D = $PetSprite
 
+# refereerd naar de label die aangeeft welke leeftijd  caspertje heeft in het scherm
 @onready var age_label: Label = $AgeLabel
 
+# refereerd naar de label die aangeeft welk soort drinken caspertje krijgt waneer je op de drink knop drukt en de 5 in de klok zit
 @onready var drink_label: Label = $DrinkLabel
 
+# refereerd naar de label die aangeedt of er bepaalde dingen aan de hand zijn. bijveerbeeld als die eet od dood is.
 @onready var message_label: Label = $MessageLabel
 
+# refereerd naar de button die een afbeelding heeft waar me je caspertje eten geeft
 @onready var feed_button: TextureButton = $FeedButton
 
+# refereerd naar de button die een afbeelding heeft waar me je caspertje drinken geeft
 @onready var drink_button: TextureButton = $DrinkButton
 
+# refereerd naar de particals die ontsaan waneer je caspertje eten geeft
 @onready var feed_particles: CPUParticles2D = $FeedParticles
 
+# refereerd naar de particals die ontsaan waneer je caspertje drinken geeft. bij drinken word dus laten zien welk drinken hij krijgt
 @onready var drink_particles: CPUParticles2D = $DrinkParticles
 
+# refereerd naar de shaders laag die weergegeven worden als je caspertje drinken geeft als er geen 5 in de klok zit
 @onready var nausea_overlay: ColorRect = $NauseaOverlay
 
+# refereerd naar de button die een afbeelding heeft waar me je caspertje kan resetten wanneer die dood is. deze word ook pas zichtbaar wanneer hij dood is.
 @onready var reset_button: TextureButton = $ResetButton
 
-
+# refereerd naar de audio bestand met de geluiden die te horen zijn als caspertje aan het eten is.
 @onready var eat_sound: AudioStreamPlayer = $EatSound
 
+# refereerd naar de audio bestand met de geluiden die te horen zijn als caspertje aan het drinken is.
 @onready var drink_sound: AudioStreamPlayer = $DrinkSound
 
 #-----------------------------------------#
