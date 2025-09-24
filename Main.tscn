@@ -1,0 +1,124 @@
+[gd_scene load_steps=14 format=3 uid="uid://drnr5agbcjk8"]
+
+[ext_resource type="Script" uid="uid://bx6w31hkpoj01" path="res://PetManager.gd" id="1_glv2v"]
+[ext_resource type="Texture2D" uid="uid://bbp5ovuhw71cs" path="res://art/buttons/feed.png" id="2_r0du0"]
+[ext_resource type="Shader" uid="uid://bkbcsakfuhaoi" path="res://Main.gdshader" id="3_03owx"]
+[ext_resource type="Texture2D" uid="uid://rxabeubguqy4" path="res://art/buttons/feedPress.png" id="3_cm0pq"]
+[ext_resource type="Texture2D" uid="uid://dy5r63vx3ttef" path="res://art/buttons/drink.png" id="4_fos0i"]
+[ext_resource type="Texture2D" uid="uid://d2j4hljdkigpq" path="res://art/buttons/drinkPress.png" id="5_3dxm6"]
+[ext_resource type="Texture2D" uid="uid://donbbq13xttvv" path="res://art/background.png" id="6_3dxm6"]
+[ext_resource type="AudioStream" uid="uid://bi5hmxud8l7r4" path="res://Music.mp3" id="7_lgr22"]
+[ext_resource type="Texture2D" uid="uid://bj6ib15mjwkn8" path="res://art/particles/food.png" id="8_trn2v"]
+[ext_resource type="AudioStream" uid="uid://bq3i71b2e437t" path="res://audio/eating-cookie.mp3" id="11_20pc6"]
+[ext_resource type="AudioStream" uid="uid://dcjtr8tknpy77" path="res://audio/Minecraft - Drinking (Sound Effect).mp3" id="12_5vvyt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wkp8b"]
+shader = ExtResource("3_03owx")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_20pc6"]
+load_path = "res://.godot/imported/aed.png-4f4b35ca58f3f92c26703063a25d672a.ctex"
+
+[node name="Main" type="Node2D"]
+position = Vector2(1, -1)
+script = ExtResource("1_glv2v")
+
+[node name="PetSprite" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(523, 869)
+
+[node name="TextureRect" type="TextureRect" parent="PetSprite"]
+z_index = -1
+offset_left = -523.0
+offset_top = -869.0
+offset_right = 557.0
+offset_bottom = 1051.0
+texture = ExtResource("6_3dxm6")
+expand_mode = 1
+
+[node name="NauseaOverlay" type="ColorRect" parent="."]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_wkp8b")
+offset_right = 1089.0
+offset_bottom = 1932.0
+color = Color(1, 1, 1, 0)
+
+[node name="AgeLabel" type="Label" parent="."]
+offset_left = 30.0
+offset_top = 14.0
+offset_right = 70.0
+offset_bottom = 37.0
+
+[node name="DrinkLabel" type="Label" parent="."]
+offset_left = 922.0
+offset_top = 13.0
+offset_right = 962.0
+offset_bottom = 36.0
+
+[node name="MessageLabel" type="Label" parent="."]
+offset_left = 534.0
+offset_top = 1851.0
+offset_right = 574.0
+offset_bottom = 1874.0
+
+[node name="FeedButton" type="TextureButton" parent="."]
+offset_left = 72.0
+offset_top = 1608.0
+offset_right = 808.0
+offset_bottom = 1784.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("2_r0du0")
+texture_pressed = ExtResource("3_cm0pq")
+
+[node name="DrinkButton" type="TextureButton" parent="."]
+offset_left = 576.0
+offset_top = 1608.0
+offset_right = 1313.0
+offset_bottom = 1786.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("4_fos0i")
+texture_pressed = ExtResource("5_3dxm6")
+
+[node name="ResetButton" type="TextureButton" parent="."]
+z_index = 9
+offset_left = 188.0
+offset_top = 998.0
+offset_right = 688.0
+offset_bottom = 1498.0
+scale = Vector2(1.43299, 1.43299)
+texture_normal = SubResource("CompressedTexture2D_20pc6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_lgr22")
+autoplay = true
+parameters/looping = true
+
+[node name="FeedParticles" type="CPUParticles2D" parent="."]
+top_level = true
+z_index = 2
+position = Vector2(544, 1000)
+emitting = false
+texture = ExtResource("8_trn2v")
+randomness = 0.65
+emission_shape = 1
+emission_sphere_radius = 128.0
+spread = 100.0
+
+[node name="DrinkParticles" type="CPUParticles2D" parent="."]
+top_level = true
+z_index = 3
+position = Vector2(523, 870)
+emitting = false
+amount = 3
+lifetime = 1.69
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="EatSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_20pc6")
+
+[node name="DrinkSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_5vvyt")
