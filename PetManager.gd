@@ -93,7 +93,7 @@ var nausea_active: bool = false
 @onready var drink_sound: AudioStreamPlayer = $DrinkSound
 
 #-----------------------------------------#
-# ALLE sprites (vul hier je bestanden in)
+# in dit block vind je alle sprits voor de verschillende leeftijden en honger/dorst stages van caspertje
 var sprites = {
 	AgeStage.BABY: {
 		"neutral": preload("res://art/baby/neutral.png"),
@@ -202,6 +202,7 @@ var sprites = {
 	}
 }
 
+# Hier zijn alle sprite varianten voor de verschillende soorte drinken die caspertje in zijn rit van het leven zal gaan drinken.
 var drink_particle_textures = {
 	AgeStage.BABY: preload("res://art/particles/milk.png"),
 	AgeStage.KIND: preload("res://art/particles/limonade.png"),
@@ -330,8 +331,7 @@ func _process(delta):
 	drink_button.disabled = not alive
 
 	feed_button.disabled = not alive
- 
-
+	
 	update_ui()
 
 	update_visual()
@@ -524,7 +524,6 @@ func save_game():
 		"hunger_timer": hunger_timer,
 		"current_minute_key": current_minute_key,
 		"gave_drink_this_window": gave_drink_this_window,
-		"missed_drinks": missed_drinks,
 		"seconds_per_age": seconds_per_age,
 		"hunger_tick_seconds": hunger_tick_seconds
 	}
@@ -552,7 +551,6 @@ func load_game():
 			hunger_timer = data.get("hunger_timer", 0.0)
 			current_minute_key = data.get("current_minute_key", _minute_key(Time.get_datetime_dict_from_system()))
 			gave_drink_this_window = data.get("gave_drink_this_window", false)
-			missed_drinks = data.get("missed_drinks", 0)
 			seconds_per_age = data.get("seconds_per_age", seconds_per_age)
 			hunger_tick_seconds = data.get("hunger_tick_seconds", hunger_tick_seconds)
 
